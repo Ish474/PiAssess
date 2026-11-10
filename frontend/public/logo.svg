@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <circle cx="64" cy="64" r="60" fill="#791D32"/>
+  <circle cx="64" cy="64" r="54" fill="none" stroke="#FFF9F0" stroke-width="3"/>
+  <text x="64" y="86" font-family="Georgia, 'Times New Roman', serif" font-size="72" font-weight="bold" fill="#FFF9F0" text-anchor="middle">π</text>
+  <text x="64" y="108" font-family="Arial, sans-serif" font-size="11" letter-spacing="2" fill="#F5E4E7" text-anchor="middle">PI WORLD SCHOOL</text>
+</svg>

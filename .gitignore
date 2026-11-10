@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# PiAssess data (all school data lives here - never commit)
+backend/data/
+
+# Node / build output
+node_modules/
+frontend/dist/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# safety extras
+.env
+*.log
+.pytest_cache/
+
