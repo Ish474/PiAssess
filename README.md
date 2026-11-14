@@ -21,7 +21,8 @@ no cloud dependency. All features (Phases 1–10) are available.
 3. Your browser opens **http://localhost:8600**.
 4. Sign in the first time with:
    - Username: `admin`
-   - Password: `admin123`
+   - The initial password is printed in the console on first run (or set
+     `PIASSESS_ADMIN_PASSWORD` before starting). You will be asked to change it.
    - **Change this password immediately** in *Settings → Users*.
 
 All data (database, uploads, backups) lives in `backend/data/` — copy that folder to move

@@ -4,6 +4,8 @@ from __future__ import annotations
 import os
 import tempfile
 
+os.environ.setdefault("PIASSESS_ADMIN_PASSWORD", "admin123")
+
 import pytest
 
 _tmp = tempfile.mkdtemp(prefix="piassess_test_")

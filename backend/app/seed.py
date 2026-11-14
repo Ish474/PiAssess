@@ -4,7 +4,9 @@ Optional demo data (synthetic students + exams) via:  python -m app.seed --demo
 """
 from __future__ import annotations
 
+import os
 import random
+import secrets
 from datetime import date
 
 from .database import SessionLocal, utcnow
@@ -19,14 +21,23 @@ LAST_NAMES = ["Kumar", "Sharma", "Yadav", "Singh", "Das", "Gupta", "Jha", "Mishr
 
 def seed_defaults(db) -> None:
     if db.query(User).count() == 0:
+        admin_password = os.environ.get("PIASSESS_ADMIN_PASSWORD")
+        generated = False
+        if not admin_password:
+            admin_password = secrets.token_urlsafe(12)
+            generated = True
         db.add(User(
             username="admin",
-            password_hash=hash_password("admin123"),
+            password_hash=hash_password(admin_password),
             full_name="School Administrator",
             role="admin",
             must_change_password=True,
         ))
-        print("  Created default administrator - username: admin  password: admin123")
+        if generated:
+            print("  Created default administrator - username: admin")
+            print(f"  Initial password (change immediately): {admin_password}")
+        else:
+            print("  Created default administrator - username: admin (password from PIASSESS_ADMIN_PASSWORD).")
         print("  Please change this password after first sign-in (Settings -> Users).")
 
     if db.query(Klass).count() == 0:

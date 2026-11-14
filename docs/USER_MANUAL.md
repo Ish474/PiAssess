@@ -10,7 +10,7 @@ This manual explains PiAssess in plain language for school staff.
 1. Double-click **start_piassess.bat** on the computer where PiAssess is installed.
 2. Your web browser opens at **http://localhost:8600**.
 3. Type your **username** and **password**, then click **Sign in**.
-4. The first-ever sign in uses username `admin` and password `admin123`.
+4. The first-ever sign in uses username `admin`; the initial password is printed in the console on first run (or set via `PIASSESS_ADMIN_PASSWORD`). You will be asked to change it.
    → Go to **Settings → Users**, click *Reset Password* and set a private password.
 
 Keep the black window open while working — it is PiAssess running. Closing it stops the

@@ -48,7 +48,7 @@ if not exist "frontend\dist\index.html" (
 
 echo Starting PiAssess...
 echo   Address:   http://localhost:8600
-echo   First use: username "admin"  password "admin123"
+echo   First use: username "admin"  (initial password is printed on first run)
 echo              ^(change the password in Settings - Users^)
 echo.
 echo Keep this window open while using PiAssess. Close it to stop.

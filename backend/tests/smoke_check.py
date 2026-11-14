@@ -7,7 +7,9 @@ out = {}
 c = httpx.Client(base_url=BASE, timeout=30)
 
 # 1. login + CSRF
-r = c.post("/api/auth/login", json={"username": "admin", "password": "admin123"})
+import os as _os
+_pw = _os.environ.get("PIASSESS_ADMIN_PASSWORD", "admin123")
+r = c.post("/api/auth/login", json={"username": "admin", "password": _pw})
 assert r.status_code == 200, r.text
 csrf = r.json()["csrf_token"]
 out["cookie_set"] = "piassess_session" in r.headers.get("set-cookie", "")
