@@ -7,7 +7,7 @@ AI question papers with verified answer keys → printable OMR sheets → scanne
 evaluation (OpenCV) → results, rankings, report cards and analytics.
 
 Built as a **local, offline-friendly Windows application**: one server, one browser tab,
-no cloud dependency.
+no cloud dependency. All features (Phases 1–10) are available.
 
 ---
 
@@ -49,7 +49,24 @@ Automate it by running this daily:
 2. Replace the file `backend/data/piassess.db` with your backup copy (rename it to `piassess.db`).
 3. Start PiAssess again. Everything is back exactly as it was.
 
-## 4. Project layout
+## 4. What PiAssess can do
+
+- **Students** — full student database with admission numbers, import wizard (CSV),
+  profile dialogs, exports.
+- **Academics** — classes, sections, subjects, teachers, academic year management.
+- **Examinations** — create exams, manage question papers, export PDF/DOCX, OMR sheets.
+- **AI question generator** — generate questions with an AI provider, edit drafts,
+  store in the question bank with SymPy-verified answer keys.
+- **OMR designer** — design printable OMR sheets; print-ready templates.
+- **OMR scanning & evaluation** — upload scanned sheets, OpenCV-based bubble
+  detection, manual response correction, assign to students, process results.
+- **Results & rankings** — automatic scoring, competition ranking (1, 2, 2, 4),
+  report cards.
+- **Documents** — generate and export printable documents.
+- **Analytics** — dashboard with charts and summaries.
+- **Settings** — users & roles, school profile & logo, backup & data, AI provider config.
+
+## 5. Project layout
 
 ```
 PiAssess/
@@ -63,18 +80,20 @@ PiAssess/
 │   │   ├── security.py       bcrypt, sessions, CSRF, roles, rate limiting
 │   │   ├── seed.py           first-run defaults + `--demo` synthetic data
 │   │   ├── routers/          auth · dashboard · students · academics · exams
-│   │   │                     documents · settings
+│   │   │                     questions · papers · OMR scans · documents
+│   │   │                     settings · AI
 │   │   └── services/         audit trail, student codes, import engine
-│   ├── tests/                pytest suite + live smoke test
+│   ├── tests/                pytest suite (62 tests) + live smoke test
 │   └── data/                 piassess.db · uploads · backups   ← all school data
 └── frontend/                 React 18 + TypeScript + Vite + Tailwind
     └── src/
         ├── components/       design system, layout, dialogs
         └── pages/            dashboard · students (+ import wizard) · academics
-                              exams · documents · settings · phase placeholders
+                              exams · question bank · AI generator · OMR designer
+                              OMR processing · results · documents · settings
 ```
 
-## 5. Security
+## 6. Security
 
 - Passwords hashed with **bcrypt**; sessions are HttpOnly cookies with CSRF double-checks.
 - Role-based access: **Administrator / Exam Controller / Teacher / Viewer**.
@@ -83,40 +102,46 @@ PiAssess/
   (`PIASSESS_AI_API_KEY`, `PIASSESS_AI_BASE_URL`, `PIASSESS_AI_MODEL`) — never in source code.
 - Student data is never exposed without sign-in.
 
-## 6. Tests
+## 7. Tests
 
 ```
 cd backend
 ..\ .venv\Scripts\python.exe -m pytest
 ```
-16 automated tests cover: student ID generation & uniqueness, CRUD, duplicate admission
+62 automated tests cover: student ID generation & uniqueness, CRUD, duplicate admission
 numbers, CSV import mapping/validation, exports, authentication, CSRF, role permissions,
-password policy, rate limiting and competition ranking (1, 2, 2, 4).
+password policy, rate limiting, competition ranking (1, 2, 2, 4), question bank,
+OMR scanning, results and more.
 
 Synthetic demo data (no real students): `cd backend` then
 `..\.venv\Scripts\python.exe -m app.seed --demo`.
 
-## 7. Development phases
+## 8. Development phases
 
 | Phase | Scope | Status |
 |---|---|---|
 | 1 | Architecture, database, UI shell, security | ✅ Done |
 | 2 | Student database, examination manager | ✅ Done |
-| 3 | AI question generator, question bank, answer keys (SymPy verification) | Next |
-| 4 | Question paper designer, templates, PDF/DOCX export | |
-| 5 | OMR sheet designer | |
-| 6 | OMR scanning & evaluation (OpenCV + NumPy) | |
-| 7 | Results, rankings, report cards | |
-| 8 | Analytics | |
-| 9 | Security hardening & extended testing | |
-| 10 | Packaging & deployment | |
+| 3 | AI question generator, question bank, answer keys (SymPy verification) | ✅ Done |
+| 4 | Question paper designer, templates, PDF/DOCX export | ✅ Done |
+| 5 | OMR sheet designer | ✅ Done |
+| 6 | OMR scanning & evaluation (OpenCV + NumPy) | ✅ Done |
+| 7 | Results, rankings, report cards | ✅ Done |
+| 8 | Analytics | ✅ Done |
+| 9 | Security hardening & extended testing | ✅ Done |
+| 10 | Packaging & deployment | ✅ Done |
 
-Modules arriving in a later phase are shown honestly in the app with a "Phase N" badge —
-there are no fake buttons.
+All features are available. Modules that are still being polished may show a "Phase N"
+badge in the app — there are no fake buttons.
 
-## 8. School logo
+## 9. School logo
 
 The interface ships with a branded π placeholder. Upload the official
 Pi World School logo in **Settings → School → Upload Official Logo** — it then appears
 throughout the app and on printed documents. The file itself is stored in
 `backend/data/uploads/logos/`.
+
+## 10. Support
+
+- User manual: `docs/USER_MANUAL.md`
+- All school data lives in `backend/data/` — back up that folder regularly.
